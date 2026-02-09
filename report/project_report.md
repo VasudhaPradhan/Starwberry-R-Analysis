@@ -1,10 +1,10 @@
-# Analysis of Treatment Effects on Growth, Yield, and Quality Traits of Strawberry Using R
+# Analysis of Treatment Effects on Growth, Yield and Quality Traits of Strawberry Using R
 
 ---
 
 ## 1. Problem Statement
 
-Strawberry cultivation involves multiple agronomic treatments that influence plant growth, flowering behavior, yield, and fruit quality.  
+Strawberry cultivation involves multiple agronomic treatments that influence plant growth, flowering behavior, yield and fruit quality.  
 In experimental horticulture, large datasets are often collected across replications and plants, but:
 
 - Data are commonly stored in complex, multi-sheet Excel workbooks  
@@ -14,7 +14,7 @@ In experimental horticulture, large datasets are often collected across replicat
 
 ### Research Problem
 
-**How can experimental strawberry data be transformed into a reproducible, statistically sound analysis pipeline that objectively identifies the best treatments for growth, yield, and quality traits?**
+**How can experimental strawberry data be transformed into a reproducible, statistically sound analysis pipeline that objectively identifies the best treatments for growth, yield and quality traits?**
 
 ---
 
