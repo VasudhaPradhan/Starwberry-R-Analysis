@@ -1,0 +1,15 @@
+# R / RStudio
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Raw data and private documents (confidential)
+data/
+results/master_data_clean.csv
+results/results_summary.csv
+Script.txt
+
+# OS files
+.DS_Store
+Thumbs.db
