@@ -1,11 +1,8 @@
-# Analysis of Treatment Effects on Growth, Yield and Quality Traits of Strawberry Using R
-
----
+# Analysis of treatment effects on growth, yield and quality parameters of strawberry plants using R
 
 ## 1. Problem Statement
 
-Strawberry cultivation involves multiple agronomic treatments that influence plant growth, flowering behavior, yield and fruit quality.  
-In experimental horticulture, large datasets are often collected across replications and plants, but:
+In this experiment, strawberry plants were given various nutrient and biostimulant treatments that influenced plant growth, flowering behavior, yield and fruit quality. In experimental horticulture, large datasets are often collected across replications and plants, but:
 
 - Data are commonly stored in complex, multi-sheet Excel workbooks  
 - Manual or spreadsheet-based analysis increases the risk of errors  
@@ -36,8 +33,20 @@ The objectives of this project were:
 - **Crop:** Strawberry (*Fragaria × ananassa*)  
 - **Experimental design:** One-factor experiment (Treatment)  
 - **Number of treatments:** 9 (T1–T9)  
-- **Replications:** Up to 4  
+- **Replications:** 3 to 4  
 - **Observations:** Plant-level measurements  
+
+### Treatment details
+
+- **T1:** 0.5% ZnSO₄  
+- **T2:** 0.2% Borax  
+- **T3:** 1% KNO₃  
+- **T4:** 0.2% Humic Acid  
+- **T5:** 0.2% Seaweed Extract  
+- **T6:** 0.5% ZnSO₄ + 0.2% Humic Acid + 0.2% Seaweed Extract  
+- **T7:** 0.2% Borax + 0.2% Humic Acid + 0.2% Seaweed Extract  
+- **T8:** 1% KNO₃ + 0.2% Humic Acid + 0.2% Seaweed Extract  
+- **T9:** Control  
 
 ### Traits analyzed
 
@@ -63,7 +72,7 @@ Missing observations were present for some replications and were handled using `
 - Missing values were retained as `NA`  
 - The cleaned dataset was exported as `master_data_clean.csv`  
 
-This ensured transparency, reproducibility, and traceability of all analyses.
+This ensured transparency, reproducibility and traceability of all analyses.
 
 ---
 
@@ -78,8 +87,8 @@ EDA was conducted to understand:
 
 For each trait, the following visualizations were created:
 
-- **Boxplots** to examine distribution, variability, and outliers  
-- **Mean ± Standard Error (SE) bar plots** to compare treatments  
+- **Boxplots** to examine distribution, variability and outliers  
+- **Mean ± Standard Error bar plots** to compare treatments  
 
 Mean ± SE plots were used as they are standard in agronomy and horticulture research for treatment comparison.
 
@@ -99,16 +108,18 @@ Mean ± SE plots were used as they are standard in agronomy and horticulture res
 
 ---
 
-### 4.4 Automated Results Summarization
+### 4.4 Results Summarization
 
-To avoid subjective interpretation:
+An R script was developed to:
 
-- An automated R script was developed to  
-  - Identify traits with significant treatment effects  
-  - Select the best-performing treatment for each trait  
-  - Apply biological logic (e.g., lower days indicate earlier flowering or harvest)  
+- Extract ANOVA p-values for all traits  
+- Identify traits with statistically significant treatment effects  
+- Compute treatment-wise means  
+- Select the best-performing treatment based on mean values  
 
-This step transformed statistical output into clear, reproducible scientific conclusions.
+The output was consolidated into a single summary table (`results_summary.csv`), which provides a clear overview of treatment performance across growth, yield and quality traits.
+
+Biological interpretation (e.g., earlier flowering indicated by fewer days) was applied during result interpretation.
 
 ---
 
@@ -117,13 +128,13 @@ This step transformed statistical output into clear, reproducible scientific con
 ### 5.1 Summary of Treatment Performance
 
 | Trait | Best Treatment | Significant |
-|-----|---------------|------------|
-| Total flowers | T8 | Yes |
-| Fruit length | T3 | Yes |
-| Fruit breadth | T3 | Yes |
-| Leaves | T1 | Yes |
-| Days to first flowering | T5 | Yes |
-| Days to first harvest | T5 | Yes |
+|------|---------------|------------|
+| Total flowers | T8 (1% KNO₃ + Humic Acid + Seaweed Extract) | Yes |
+| Fruit length | T3 (1% KNO₃) | Yes |
+| Fruit breadth | T3 (1% KNO₃) | Yes |
+| Number of leaves | T1 (0.5% ZnSO₄) | Yes |
+| Days to first flowering | T5 (0.2% Seaweed Extract) | Yes |
+| Days to first harvest | T5 (0.2% Seaweed Extract) | Yes |
 | Plant spread | — | No |
 | Crown diameter | — | No |
 
@@ -131,25 +142,156 @@ This step transformed statistical output into clear, reproducible scientific con
 
 ### 5.2 Interpretation of Results
 
-- **T8** showed superior performance for yield-related traits  
-- **T3** produced fruits with superior size and quality  
-- **T5** resulted in the earliest flowering and harvesting  
-- **T1** promoted vegetative growth as indicated by leaf number  
-- Plant spread and crown diameter were relatively stable across treatments  
+- **T8 (1% KNO₃ + Humic Acid + Seaweed Extract)** showed superior performance for the primary yield trait (total number of flowers).  
+- **T3 (1% KNO₃)** consistently produced fruits with superior size, indicating better fruit quality.  
+- **T5 (0.2% Seaweed Extract)** resulted in the earliest flowering and harvesting, highlighting its role in crop earliness.  
+- **T1 (0.5% ZnSO₄)** promoted vegetative growth as indicated by a higher number of leaves.  
+- **Plant spread and crown diameter** did not differ significantly among treatments, suggesting relative stability of these traits under the experimental conditions.
+
+---
+
+### 5.3 Visualization of Trait Responses
+
+#### Growth Traits
+
+**Plant Spread**
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="../results/figures/plant_spread_boxplot.png" width="100%">
+      <br><sub>Boxplot</sub>
+    </td>
+    <td align="center">
+      <img src="../results/figures/plant_spread_mean_SE.png" width="100%">
+      <br><sub>Mean ± SE</sub>
+    </td>
+  </tr>
+</table>
+
+**Number of Leaves**
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="../results/figures/leaves_boxplot.png" width="100%">
+      <br><sub>Boxplot</sub>
+    </td>
+    <td align="center">
+      <img src="../results/figures/leaves_mean_SE.png" width="100%">
+      <br><sub>Mean ± SE</sub>
+    </td>
+  </tr>
+</table>
+
+**Crown Diameter**
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="../results/figures/crown_diameter_boxplot.png" width="100%">
+      <br><sub>Boxplot</sub>
+    </td>
+    <td align="center">
+      <img src="../results/figures/crown_diameter_mean_SE.png" width="100%">
+      <br><sub>Mean ± SE</sub>
+    </td>
+  </tr>
+</table>
+
+---
+
+#### Yield Traits
+
+**Total Flowers**
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="../results/figures/total_flowers_boxplot.png" width="100%">
+      <br><sub>Boxplot</sub>
+    </td>
+    <td align="center">
+      <img src="../results/figures/total_flowers_mean_SE.png" width="100%">
+      <br><sub>Mean ± SE</sub>
+    </td>
+  </tr>
+</table>
+
+**Days to First Flowering**
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="../results/figures/flowering_days_boxplot.png" width="100%">
+      <br><sub>Boxplot</sub>
+    </td>
+    <td align="center">
+      <img src="../results/figures/flowering_days_mean_SE.png" width="100%">
+      <br><sub>Mean ± SE</sub>
+    </td>
+  </tr>
+</table>
+
+**Days to First Harvest**
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="../results/figures/harvest_days_boxplot.png" width="100%">
+      <br><sub>Boxplot</sub>
+    </td>
+    <td align="center">
+      <img src="../results/figures/harvest_days_mean_SE.png" width="100%">
+      <br><sub>Mean ± SE</sub>
+    </td>
+  </tr>
+</table>
+
+---
+
+#### Quality Traits
+
+**Fruit Length**
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="../results/figures/fruit_length_boxplot.png" width="100%">
+      <br><sub>Boxplot</sub>
+    </td>
+    <td align="center">
+      <img src="../results/figures/fruit_length_mean_SE.png" width="100%">
+      <br><sub>Mean ± SE</sub>
+    </td>
+  </tr>
+</table>
+
+**Fruit Breadth**
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="../results/figures/fruit_breadth_boxplot.png" width="100%">
+      <br><sub>Boxplot</sub>
+    </td>
+    <td align="center">
+      <img src="../results/figures/fruit_breadth_mean_SE.png" width="100%">
+      <br><sub>Mean ± SE</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
 ## 6. Discussion
 
-The results indicate that no single treatment was optimal for all traits.  
-Distinct trade-offs were observed between:
+The results indicate that no single treatment was optimal for all traits. Distinct trade-offs were observed between:
 
 - Vegetative growth  
 - Yield potential  
 - Fruit quality  
 - Earliness  
-
-This highlights the importance of trait-specific treatment selection in strawberry cultivation.
 
 ---
 
@@ -171,5 +313,3 @@ The analytical framework developed in this study can be applied to other agricul
 - tidyverse packages (`dplyr`, `ggplot2`, `readr`)  
 - Statistical methods: ANOVA, Tukey HSD  
 - Version control: GitHub  
-
----
